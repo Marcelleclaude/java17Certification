@@ -1,0 +1,12 @@
+-Defining Instance and Class Variables.
+  a class variable is one that is defined on the class level and shared
+among all instances of the class. It can even be publicly accessible to classes outside the
+class and doesn’t require an instance to use. 
+
+a variable is a class variable if it has the static keyword in its declaration.
+Instance and class variables do not require you to initialize them. As soon as you declare
+these variables, they are given a default value. The compiler doesn’t know what value to use
+and so wants the simplest value it can give the type: null for an object, zero for the numeric
+types, and false for a boolean.
+
+-Inferring the Type with var
