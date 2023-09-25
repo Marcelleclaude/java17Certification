@@ -10,3 +10,138 @@ and so wants the simplest value it can give the type: null for an object, zero f
 types, and false for a boolean.
 
 -Inferring the Type with var
+You have the option of using the keyword var instead of the type when declaring local variables under certain conditions. To use this feature, you just type var instead of the primitive
+or reference type. Here’s an example:
+public class Zoo {
+ public void whatTypeAmI() {
+ var name = "Hello";
+ var size = 7;
+ }
+}
+
+-Examples with var
+public void doesThisCompile(boolean check) {
+4: var question;
+5: question = 1;
+6: var answer;
+Initializing Variables 43
+7: if (check) {
+8: answer = 2;
+9: } else {
+10: answer = 3; // , it is
+not on the same line as the declaration, so it does not count for var
+11: }
+12: System.out.println(answer);
+13: }
+The code does not compile. Remember that for local variable type inference, the compiler
+looks only at the line with the declaration. Since question and answer are not assigned
+values on the lines where they are defined, the compiler does not know what to make of
+them. For this reason, both lines 4 and 6 do not compile.
+EXAMPLES:
+
+4: public void twoTypes() {
+5: int a, var b = 3; // DOES NOT COMPILE // All the types declared on
+a single line must be the same type and share the same declaration
+6: var n = null; // DOES NOT COMPILE
+7: }
+
+MORE EXAMPLES:
+public int addition(var a, var b) { // DOES NOT COMPILE // HERE a nd b are method params , not local variables
+ return a + b;
+} REMEMBER: var is only used for local variable type inference
+
+VAR RULES:
+There’s one last rule you should be aware of: var is not a reserved word and allowed to
+be used as an identifier. It is considered a reserved type name. A reserved type name means it
+cannot be used to define a type, such as a class, interface, or enum
+
+-Managing Variable Scope AND Limiting Scope
+Local variables can never have a scope larger than the method they are defined in. However,
+they can have a smaller scope. Consider this example:
+3: public void eatIfHungry(boolean hungry) {
+4: if (hungry) {
+5: int bitesOfCheese = 1;
+6: } // bitesOfCheese goes out of scope here
+7: System.out.println(bitesOfCheese); // DOES NOT COMPILE
+8: } // When you see a set of braces ({}) in the code, it means you have entered a new block of
+code. Each block of code has its own scope. When there are multiple blocks, you match them
+from the inside out. In our case, the if statement block begins at line 4 and ends at line 6. The
+method’s block begins at line 3 and ends at line 8.
+
+RULES:
+Remember that blocks can contain other blocks. These smaller contained blocks can reference variables defined in the larger scoped blocks, but not vice versa. Here’s an example:
+16: public void eatIfHungry(boolean hungry) {
+17: if (hungry) {
+18: int bitesOfCheese = 1;
+19: {
+20: var teenyBit = true;
+21: System.out.println(bitesOfCheese);
+22: }
+23: }
+24: System.out.println(teenyBit); // DOES NOT COMPILE
+25: }
+The variable defined on line 18 is in scope until the block ends on line 23. Using it in the
+smaller block from lines 19 to 22 is fine. The variable defined on line 20 goes out of scope on
+line 22. Using it on line 24 is not allowed
+
+
+-rule for instance variables: they are
+available as soon as they are defined and last for the entire lifetime of the object itself.
+
+- The rule for class, aka static, variables is even easier: they go into scope when declared like the other variable types. However, they stay in scope for the entire life of the program.
+
+
+Reviewing Scope:
+Let’s review the rules on scope:
+■ Local variables: In scope from declaration to the end of the block
+■ Method parameters: In scope for the duration of the method
+■ Instance variables: In scope from declaration until the object is eligible for garbage
+collection
+■ Class variables: In scope from declaration until the program ends
+
+-Destroying Objects AND Understanding Garbage Collectui==ion
+Garbage collection refers to the process of automatically freeing memory on the heap by
+deleting objects that are no longer reachable in your program. In Java, eligible for
+garbage collection refers to an object’s state of no longer being accessible in a program and
+therefore able to be garbage collected.
+
+Java includes a built-in method to help support garbage collection where you can suggest
+that garbage collection run.
+System.gc();
+
+-Tracing Eligibility
+How does the JVM know when an object is eligible for garbage collection? The JVM waits
+patiently and monitors each object until it determines that the code no longer needs that
+memory. An object will remain on the heap until it is no longer reachable. An object is no
+longer reachable when one of two situations occurs:
+■ The object no longer has any references pointing to it.
+■ All references to the object have gone out of scope
+
+
+
+SUMMARY 
+
+-Java begins program execution with a main() method. The most common signature for this
+method run from the command line is public static void main(String[] args)
+
+. A wildcard ending an import statement means you want to
+import all classes in that package. It does not include packages that are inside that one. The
+package java.lang is special in that it does not need to be imported.
+
+- Numeric literals are allowed to contain underscores (_) as long as they do not start or end the literal and are not next to a decimal point (.)
+
+-Identifiers may contain letters, numbers, currency symbols,or _. Identifiers may not begin with numbers.
+
+-Local variable declarations may use the var
+keyword instead of the actual type. When using var, the type is set once at compile time and
+does not change.
+
+-Scope refers to that portion of code where a variable can be accessed. There are three kinds of variables in Java, depending on their scope: instance variables, class variables, and local variables
+
+- Instance variables are the non-static fields of your class. Class variables are the static fields within a class. 
+
+-Local variables are declared within a constructor, method, or initializer block
+
+-When an object is instantiated, fields and blocks of code are initialized first. Then the constructor is run. 
+- Finally, garbage collection is responsible for removing objects from memory when they can never be used again. An object becomes eligible for garbage collection when there are no more references to it or its references have all gone out of scope
+
