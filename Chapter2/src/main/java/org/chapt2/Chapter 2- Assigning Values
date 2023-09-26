@@ -100,3 +100,17 @@ Making Decisions with the Ternary Operator
 The ternary operator has the following form: booleanExpression ? expression1 : expression2
 The first operand must be a boolean expression, and the second and third operands can
 be any expression that returns a value. e. The ternary operation is really a condensed form of a combined if and else statement that returns a value.
+
+
+The inequality operator (!=) can be used to compare objects.
+The return value of an assignment operation expression is the value of the newly
+assigned variable.
+. The logical complement operator (!) cannot be used to flip numeric values.
+? : takes 3 values
+- Unary operators are always executed before any surrounding numeric binary or ternary
+operators.
+
+-The post-decrement operator (--) returns the value of the variable before the decrement
+ is applied.
+
+ -The ! operator cannot be used on numeric values
