@@ -1,0 +1,108 @@
+Increment and Decrement Operators
+Increment and decrement operators, ++ and --, respectively, can be applied to numeric variables and have a high order of precedence compared to binary operators. In other words,
+they are often applied first in an expression.
+Increment and decrement operators require special care because the order in which they
+are attached to their associated variable can make a difference in how an expression is processed
+
+Pre-increment ++w Increases the value by 1 and returns the new value
+Pre-decrement --x Decreases the value by 1 and returns the new value
+Post-increment y++ Increases the value by 1 and returns the original value
+Post-decrement z-- Decreases the value by 1 and returns the original value
+
+Examples:
+The following code snippet illustrates this distinction:
+int parkAttendance = 0;
+System.out.println(parkAttendance); // 0
+System.out.println(++parkAttendance); // 1
+System.out.println(parkAttendance); // 1
+System.out.println(parkAttendance--); // 1
+System.out.println(parkAttendance); // 0
+
+Working with Binary Arithmetic Operators
+Modulus: i % j Returns the remainder after division of one numeric value by another
+
+REMEMBER: The multiplicative operators (*, /, %) have a higher order of precedence than the
+additive operators (+, -). Take a look at the following expression:
+int price = 2 * 5 + 3 * 4 - 8;
+First, you evaluate the 2 * 5 and 3 * 4, which reduces the expression to this:
+int price = 10 + 12 - 8;
+Then, you evaluate the remaining terms in left-to-right order, resulting in a value of
+price of 14
+
+
+So, you can change the order of the operation by adding () to it. 
+Changing the Order of Operation
+Let’s return to the previous price example. The following code snippet contains the same
+values and operators, in the same order, but with two sets of parentheses added:
+int price = 2 * ((5 + 3) * 4 - 8);
+This time you would evaluate the addition operator 5 + 3, which reduces the expression
+to the following:
+int price = 2 * (8 * 4 - 8);
+You can further reduce this expression by multiplying the first two values within the
+parentheses:
+int price = 2 * (32 - 8);
+Next, you subtract the values within the parentheses before applying terms outside the
+parentheses:
+int price = 2 * 24;
+Finally, you would multiply the result by 2, resulting in a value of 48 for price
+
+Java, unlike some other programming languages,
+does not allow brackets, [], to be used in place of parentheses.
+
+Division and Modulus Operators
+The modulus operator,
+sometimes called the remainder operator, is simply the remainder when two numbers are
+divided. For example, 9 divided by 3 divides evenly and has no remainder; therefore, the
+result of 9 % 3 is 0. On the other hand, 11 divided by 3 does not divide evenly; therefore,
+the result of 11 % 3 is 2.
+The following examples illustrate this distinction:
+System.out.println(9 / 3); // 3
+System.out.println(9 % 3); // 0
+System.out.println(10 / 3); // 3
+System.out.println(10 % 3); // 1 soo here lets say you have 10 candy you want to share with 3 friends. you give each 3 candies so 3*3=9 , therefore you have 1 candy left so the modulus is one
+System.out.println(11 / 3); // 3
+System.out.println(11 % 3); // 2
+
+
+Numeric Promotion Rules
+1. If two values have different data types, Java will automatically promote one of the
+values to the larger of the two data types.
+example: 
+What is the data type of x * y?
+int x = 1;
+long y = 33;
+var z = x * y;
+In this case, we follow the first rule. Since one of the values is int and the other is long,
+and long is larger than int,the int value x is first promoted to a long. The result z is
+then a long value.
+
+2. If one of the values is integral and the other is floating-point, Java will automatically
+promote the integral value to the floating-point value’s data type.
+Example:
+What is the data type of x + y?
+double x = 39.21;
+float y = 2.1f;
+var z = x + y;
+remember:, floating-point literals are assumed to be double unless postfixed with an f, as in 2.1f.   with both operands being promoted to a double, and the result z would be a double value.
+
+3. Smaller data types, namely, byte, short, and char, are first promoted to int any time
+they’re used with a Java binary arithmetic operator with a variable (as opposed to a
+value), even if neither of the operands is int.
+Example:
+What is the data type of x * y?
+short x = 10;
+short y = 3;
+var z = x * y;
+On the last line, we must apply the third rule: that x and y will both be promoted to
+int before the binary multiplication operation, resulting in an output of type int
+
+4. After all promotion has occurred and the operands have the same data type, the resulting value will have the same data type as its promoted operands.
+What is the data type of w * x / y?
+short w = 14;
+float x = 13;
+double y = 30;
+var z = w * x / y;
+In this case, we must apply all of the rules. First, w will automatically be promoted to
+int solely because it is a short and is being used in an arithmetic binary operation. The
+promoted w value will then be automatically promoted to a float so that it can be multiplied with x. The result of w * x will then be automatically promoted to a double so
+that it can be divided by y, resulting in a double value.
