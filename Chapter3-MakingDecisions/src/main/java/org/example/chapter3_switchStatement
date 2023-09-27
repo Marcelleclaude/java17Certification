@@ -1,0 +1,72 @@
+
+Applying switch Statements
+,switch Statements s a complex decision-making structure in
+which a single value is evaluated and flow is redirected to the first matching branch, known
+as a case statement. If no such case statement is found that matches the value, an optional
+Applying switch Statements 111
+default statement will be called. If no such default option is available, the entire switch
+statement will be skipped.
+
+e you should be aware of for the exam: a switch statement is not required to
+contain any case statements. For example, this statement is perfectly valid:
+switch(month) {}
+
+EXAMPLE OF SWITCH STATEMENT:
+public void printDayOfWeek(int day) {
+            switch(day) {
+            case 0:
+            System.out.print("Sunday");
+            break;
+            case 1:
+            System.out.print("Monday");
+            break;
+            case 2:
+            System.out.print("Tuesday");
+            break;
+            case 3:
+            System.out.print("Wednesday");
+            break;
+            case 4:
+            System.out.print("Thursday");
+            break;
+            case 5:
+            System.out.print("Friday");
+            break;
+            case 6:
+            System.out.print("Saturday");
+            break;
+            default:
+            System.out.print("Invalid value");
+            break; // A break statement terminates the switch statement
+                      and returns flow control to the enclosing process. Put simply, it ends the switch statement
+                      immediately.
+                      The break statements are optional, but without them the code will execute every branch
+                      following a matching case statement, including any default statements it finds. Without break
+                      statements in each branch, the order of case and default statements is now extremely important
+            } }
+
+ Selecting switch Data Types
+a switch statement has a target variable that is not evaluated until
+runtime. The type of this target can include select primitive data types (int, byte, short, char)
+and their associated wrapper classes (Integer, Byte, Short, Character). The following is a list of
+all data types supported by switch statements:
+■ int and Integer
+■ byte and Byte
+■ short and Short
+■ char and Character
+■ String
+■ enum values
+■ var (if the type resolves to one of the preceding types)
+
+IMPORTANT: THOSE ARE NOT  PERMITTED IN SWITCH STATEMENT:
+Notice that boolean, long, float, and double are excluded from
+switch statements, as are their associated Boolean, Long, Float, and
+Double classes.
+
+Determining Acceptable Case Values
+This means you can use only literals, enum constants, or final constant variables
+of the same data type. By final constant, we mean that the variable must be marked with
+the final modifier and initialized with a literal value in the same expression in which it
+is declared.
+
+The switch Expression
