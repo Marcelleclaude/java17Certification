@@ -1,3 +1,9 @@
+IMPORTANT!!!!
+A switch expression supports only the primitives int, byte, short,
+and char, along with their associated wrapper classes Integer, Byte, Short, and
+Character.. It also supports enum and String,supports var if the type can be resolved to a supported switch data type
+
+
 
 Applying switch Statements
 ,switch Statements s a complex decision-making structure in
