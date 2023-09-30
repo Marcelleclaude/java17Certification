@@ -1,0 +1,103 @@
+the while statement, Like all repetition control structures, it has a termination condition, implemented
+as a boolean expression, that will continue as long as the expression evaluates to true.
+
+a while loop is similar to an if statement in that it is composed
+of a boolean expression and a statement, or a block of statements. During execution, the
+boolean expression is evaluated before each iteration of the loop and exits if the evaluation
+returns false.
+EXAMPLE:Let’s see how a loop can be used to model a mouse eating a meal:
+ int roomInBelly = 5;
+ public void eatCheese(int bitesOfCheese) {
+   while (bitesOfCheese > 0 && roomInBelly > 0) {
+       bitesOfCheese--;
+          roomInBelly--;
+          }
+          System.out.println(bitesOfCheese+" pieces of cheese left");
+         }
+
+-The do/while Statement
+Unlike a while loop, though, a do/while loop guarantees that the statement or block
+will be executed at least once.
+
+-Infinite Loops
+An infinite loop is a loop whose termination condition is never reached during runtime.
+
+- for Loops
+Let’s take a look at an example that prints the first five numbers, starting with zero:
+for(int i = 0; i < 5; i++) {
+ System.out.print(i + " ");
+} 0 1 2 3 4
+
+-Printing Elements in Reverse
+for (var counter = 4; counter >= 0; counter--) {
+ System.out.print(counter + " ");
+}4 3 2 1 0
+
+-IMPORTANT!!!!
+You should familiarize yourself with the following five examples; variations of these are likely to be seen on the exam.
+1. Creating an Infinite Loop
+for( ; ; ) //Note that the semicolons separating the three sections are required, as for( ) without
+             any semicolons will not compile
+ System.out.println("Hello World");
+
+ 2. Adding Multiple Terms to the for Statement
+ int x = 0;
+ for(long y = 0, z = 4; x < 5 && y < 10; x++, y++) {
+  System.out.print(y + " "); }
+ System.out.print(x + " ");//This code will print the following when executed:
+  0 1 2 3 4 5
+
+ EXPLANATION:
+ In this code, you have a for loop that iterates over the variables x, y, and z. Let's go through the code step by step:
+int x = 0; initializes x to 0.
+In the for loop:
+long y = 0, z = 4; initializes y to 0 and z to 4.
+The loop continues as long as both x is less than 5 and y is less than 10.
+In each iteration of the loop, x is incremented by 1 (x++) and y is incremented by 1 (y++).
+The loop body System.out.print(y + " "); prints the value of y followed by a space in each iteration.
+After the loop, System.out.print(x + " "); prints the value of x followed by a space.
+Now, let's break down what happens in each iteration:
+In the first iteration, x is 0, y is 0, and z is 4. y is less than 10, so the loop prints 0 and increments x and y.
+In the second iteration, x is 1, y is 1, and z is 4. y is less than 10, so the loop prints 1 and increments x and y.
+This process continues until the fourth iteration when x becomes 4 and y becomes 4. The loop prints 4 and increments x and y.
+In the fifth iteration, x becomes 5, and y becomes 5. The loop checks the conditions (x less than 5 and y less than 10) and finds that x is no longer less than 5, so it exits the loop.
+After the loop, the code prints the value of x, which is 5.
+
+3. Redeclaring a Variable in the Initialization Block
+int x = 0;
+for(int x = 4; x < 5; x++) // DOES NOT COMPILE BECAUSE
+ System.out.print(x + " ");
+ doesnt compile because: x is repeated in the initialization block after
+ already being declared before the loop, resulting in the compiler stopping because of
+ a duplicate variable declaration. to fix it:
+ int x = 0;
+ for(x = 0; x < 5; x++)
+  System.out.print(x + " ");
+ Note that this variation will now compile because the initialization block simply assigns
+ a value to x and does not declare it.
+
+ 4. Using Incompatible Data Types in the Initialization Block
+ int x = 0;
+ for(long y = 0, int z = 4; x < 5; x++) // DOES NOT COMPILE
+  System.out.print(y + " "); // The variables in the initialization block must all be of the same type
+
+5. Using Loop Variables Outside the Loop
+5. Using Loop Variables Outside the Loop
+for(long y = 0, x = 4; x < 5 && y < 10; x++, y++)
+ System.out.print(y + " ");
+System.out.print(x); // DOES NOT COMPILE. Since x was only scoped for the
+loop, using it outside the loop will cause a compiler error.
+
+-The for-each Loop
+The for-each loop declaration is composed of an initialization section and an object to be
+iterated over. The right side of the for-each loop must be one of the following:
+■ A built-in Java array such as a List or a Set.
+■ An object whose type implements java.lang.Iterable
+
+IMPORTANT!!!!
+it does not include all of the Collections Framework classes r interfaces, but only those that implement or extend that Collection interface.
+Map is not supported in a for-each loop.
+
+-The left side of the for-each loop must include a declaration for an instance of a variable
+ whose type is compatible with the type of the array or collection on the right side of the
+ statement
