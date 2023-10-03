@@ -1,0 +1,57 @@
+public(access Modifier)
+final(optional specifier)
+ void(return type)
+ (MethodName) nap (int minutes)->(list of parameters)
+ throws InterruptedException (exceptions (optional){Method body}
+IMPORTANT:!!! While access modifiers and optional specifiers can appear in any order, they must all
+appear before the return type.
+
+ This is called a method declaration, which specifies all the information needed to call the
+ method.
+ Two of the parts—
+ the method name and parameter list—are called the method signature : it provides instructions for how callers can reference this method. The method signature does
+not include the return type and access modifiers, which control where the method can be referenced
+
+-Access Modifiers
+An access modifier determines what classes a method can be accessed from. Java offers four choices of access modifier:
+private:  The private modifier means the method can be called only from within the
+same class.
+
+Package Access : With package access, the method can be called only from a class in
+the same package.. Package access is sometimes referred to as package-private or default access
+
+protected: The protected modifier means the method can be called only from a class
+ in the same package or a subclass
+
+public: The public modifier means the method can be called from anywhere.
+
+EXAMPLE: public class ParkTrip {
+ public void skip1() {}
+default void skip2() {} // DOES NOT COMPILE: default is never used as an access modifier.
+void public skip3() {} // DOES NOT COMPILE void should never be placed before the access modifier.
+ void skip4() {}
+ }
+
+Return Type
+It must appear after any access modifiers or optional specifiers and before the method name
+The return type might be an actual Java type such as String or int. if there is no return type, the void keyword is used.
+IMPORTANT!!!
+Methods with a return type other than void are required to have a return statement inside the method
+body.
+. Methods that have a return type of void are permitted to have a return statement with no value
+returned or omit the return statement entirely.
+
+-Method Name
+ public void 2jog() {} // DOES NOT COMPILE because an identifier cannot start with a #
+ public void() {} // DOES NOT COMPILE because Method name is missing.
+  public _() {} // DOES NOT COMPILE because a single underscore isnt allowed.
+
+-Parameter List
+If you do have multiple parameters, you separate them with a comma example:  public void run5(int a, int b) {}
+
+-Method Signature
+A method signature, composed of the method name and parameter list, is what Java uses
+to uniquely determine exactly which method you are attempting to call
+
+
+
