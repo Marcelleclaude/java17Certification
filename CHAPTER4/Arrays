@@ -1,0 +1,112 @@
+an array is an ordered list. It can contain duplicates.
+int[] numbers = new int[3];//The most common way to create an array
+Another way to create an array is to specify all the elements it should start out with:
+int[] moreNumbers = new int[] {42, 55, 99};
+int[] moreNumbers = {42, 55, 99};// This approach is called an anonymous array. It is anonymous because you don’t specify
+the type and size.
+Finally, you can type the [] before or after the name, and adding a space is optional. This
+means that all five of these statements do the exact same thing:
+int[] numAnimals;int [] numAnimals2;int []numAnimals3;int numAnimals4[];int numAnimals5 [];
+
+4: String[] mammals = {"monkey", "chimp", "donkey"};
+5: System.out.println(mammals.length()); // DOES NOT COMPILE because here lenght is method.
+
+explanation on why this is wrong:
+numbers[10] = 3;
+numbers[numbers.length] = 5;
+for (int i = 0; i <= numbers.length; i++)
+numbers[i] = i + 5;
+In this code, you have an array `numbers`, and you are performing several operations on it. Let's break down the code step by step:. `numbers[10] = 3;`
+   - This assigns the value 3 to the 11th element of the `numbers` array. Note that array indices start from 0, so `numbers[10]` is the 11th element.
+2. `numbers[numbers.length] = 5;`
+   - This tries to assign the value 5 to an element in the array at an index equal to the length of the `numbers` array. However, this will result in an `ArrayIndexOutOfBoundsException` because array indices should be between 0 and `length - 1`. So, this line will throw an exception.
+3. The `for` loop:
+   - `for (int i = 0; i <= numbers.length; i++)` initializes `i` to 0 and iterates as long as `i` is less than or equal to `numbers.length`.
+4. Inside the loop, `numbers[i] = i + 5;` assigns a value to each element in the `numbers` array. However, because the loop runs until `i` is equal to `numbers.length`, it will access an index that is one beyond the last valid index of the array. This will also result in an `ArrayIndexOutOfBoundsException`.
+So, this code will throw an exception, and you should avoid accessing array elements outside of the valid index range (from 0 to `length - 1`).
+
+-Sorting
+Arrays requires an import. To use it, you must have either of the following two statements in your class:
+import java.util.*; // import whole package including Arrays
+import java.util.Arrays; // import just Arrays
+
+EXAMPLE:
+int[] numbers = { 6, 9, 1 };
+Arrays.sort(numbers);
+for (int i = 0; i < numbers.length; i++)
+ System.out.print(numbers[i] + " ");//The result is 1 6 9
+
+ -Searching
+ Java also provides a convenient way to search, but only if the array is already sorted.
+
+ TABLE 4.3 Binary search rules
+ Scenario                                                   Result
+ Target element found in sorted array                    Index of match
+ Target element not found in sorted array                  Negative value showing one smaller than the negative of the index,
+ where a match needs to be inserted to preserve sorted order
+ Unsorted array                                           A surprise; this result is undefined
+
+ Let’s try these rules with an example:
+ 3: int[] numbers = {2,4,6,8};
+ 4: System.out.println(Arrays.binarySearch(numbers, 2)); // 0
+ 5: System.out.println(Arrays.binarySearch(numbers, 4)); // 1
+ 6: System.out.println(Arrays.binarySearch(numbers, 1)); // -1//Since 0 already means something for array indexes,
+ Java needs to subtract 1 to give us the answer of –1
+ 7: System.out.println(Arrays.binarySearch(numbers, 3)); // -2 // Although 3 isn’t in the list, it would need to be inserted at element 1 to preserve
+the sorted order. We negate and subtract 1 for consistency, getting –1 –1, also known as –2
+ 8: System.out.println(Arrays.binarySearch(numbers, 9)); // -5// that 9 should be inserted at index 4.
+ We again negate and subtract 1, getting –4 –1, also known as –5.
+
+ 5: int[] numbers = new int[] {3,2,1};// ARRAY NOT SORTED
+ 6: System.out.println(Arrays.binarySearch(numbers, 2));//1
+ 7: System.out.println(Arrays.binarySearch(numbers, 3));
+ IMPORTANT:t. As soon as you see the array isn’t sorted, look for an answer choice about unpredictable output.
+
+ -Using compare()
+RULES NEEDED TO KNOW BEFORE CALLING compare():
+■ A negative number means the first array is smaller than the second.
+■ A zero means the arrays are equal.
+■ A positive number means the first array is larger than the second.
+Here’s an example:
+System.out.println(Arrays.compare(new int[] {1}, new int[] {2}));
+
+ let’s look at how to compare arrays of different lengths:
+■ If both arrays are the same length and have the same values in each spot in the same
+order, return zero.
+■ If all the elements are the same but the second array has extra elements at the end,
+return a negative number.
+■ If all the elements are the same, but the first array has extra elements at the end, return a
+positive number.
+■ If the first element that differs is smaller in the first array, return a negative number.
+■ If the first element that differs is larger in the first array, return a positive number.
+
+Finally, what does smaller mean? Here are some more rules that apply here and to
+compareTo(), which you see in Chapter 8, “Lambdas and Functional Interfaces”:
+■ null is smaller than any other value.
+■ For numbers, normal numeric order applies.
+■ For strings, one is smaller if it is a prefix of another.
+■ For strings/characters, numbers are smaller than letters.
+■ For strings/characters, uppercase is smaller than lower
+
+Finally, this code does not compile because the types are different. When comparing two
+arrays, they must be the same array type.
+System.out.println(Arrays.compare(
+ new int[] {1}, new String[] {"a"})); // DOES NOT COMPILE
+
+
+ -Using mismatch()
+ If the
+ arrays are equal, mismatch() returns -1. Otherwise, it returns the first index where they differ
+
+ System.out.println(Arrays.mismatch(new int[] {1}, new int[] {1}));// -1 because they are the same
+ System.out.println(Arrays.mismatch(new String[] {"a"},//0  because the entries at element 0 arent = so it returns the 1st index where they differ
+  new String[] {"A"}));
+ System.out.println(Arrays.mismatch(new int[] {1, 2}, new int[] {1}));//1
+
+ -Working with Multidimensional Arrays
+Multiple array separators are all it takes to declare arrays with multiple dimensions. You can
+locate them with the type or variable name in the declaration, just as before:
+int[][] vars1; // 2D array
+int vars2 [][]; // 2D array
+int[] vars3[]; // 2D array
+int[] vars4 [], space [][]; // a 2D AND a 3D array

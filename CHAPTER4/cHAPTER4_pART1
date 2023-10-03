@@ -1,0 +1,207 @@
+Creating and Manipulating Strings
+Concatenating
+But what is
+"1" + "2"? It’s "12" because Java combines the two String objects. Placing one String
+before the other String and combining them is called string concatenation.
+
+1. If both operands are numeric, + means numeric addition.
+2. If either operand is a String, + means concatenation.
+3. The expression is evaluated left to right.
+Now let’s look at some examples:
+System.out.println(1 + 2); // 3
+System.out.println("a" + "b"); // ab
+System.out.println("a" + "b" + 3); // ab3
+System.out.println(1 + 2 + "c"); // 3c
+System.out.println("c" + 1 + 2); // c12
+System.out.println("c" + null); // cnull
+
+int three = 3;
+String four = "4";
+System.out.println(1 + 2 + three + four);="64"
+
+There is one more thing to know about concatenation, but it is easy. In this example, you
+just have to remember what += does. Keep in mind, s += "2" means the same thing as s
+= s + "2".
+4: var s = "1"; // s currently holds "1"
+5: s += "2"; // s currently holds "12"
+6: s += 3; // s currently holds "123"
+7: System.out.println(s); // 123
+
+
+-Determining the Length
+ The method length() returns the number of characters in the String. The method signature is as follows:
+ public int length()
+ The following code shows how to use length():
+ var name = "animals";
+ System.out.println(name.length()); // 7
+
+ -Getting a Single Character
+  The method charAt() lets you query the string to find out what character is at a specific index.
+  The method signature is as follows:
+  public char charAt(int index)
+  The following code shows how to use charAt():
+  var name = "animals";
+  System.out.println(name.charAt(0)); // a
+  System.out.println(name.charAt(6)); // s
+  System.out.println(name.charAt(7)); // exception
+
+
+ -Finding an Index
+The method indexOf() looks at the characters in the string and finds the first index that
+matches the desired value. The indexOf method can work with an individual character or a
+whole String as input
+
+Remember that a char can be passed to an int parameter type. On the exam, you’ll only see a char passed to the
+parameters named ch. The method signatures are as follows:
+public int indexOf(int ch)
+public int indexOf(int ch, int fromIndex)
+public int indexOf(String str)
+public int indexOf(String str, int fromIndex)
+The following code shows you how to use indexOf():
+var name = "animals";
+System.out.println(name.indexOf('a')); // 0
+System.out.println(name.indexOf("al")); // 4
+System.out.println(name.indexOf('a', 4)); // 4
+System.out.println(name.indexOf("al", 5)); // -1
+
+IMPORTANT!!!!
+Unlike charAt(), the indexOf()
+method doesn’t throw an exception if it can’t find a match, instead returning –1. Because
+indexes start with 0, the caller knows that –1 couldn’t be a valid index.
+
+-Getting a Substring
+The method substring() also looks for characters in a string. It returns parts of the string.
+The method signatures are as follows:
+public String substring(int beginIndex)
+public String substring(int beginIndex, int endIndex)
+
+The following code shows how to use substring():
+var name = "animals";
+System.out.println(name.substring(3)); // mals
+System.out.println(name.substring(name.indexOf('m'))); // mals
+System.out.println(name.substring(3, 4)); // m
+System.out.println(name.substring(3, 7)); // mals
+
+
+-Adjusting Case
+These methods make it easy to convert your data. The method signatures are as follows:
+public String toLowerCase()
+public String toUpperCase()
+The following code shows how to use these methods:
+var name = "animals";
+System.out.println(name.toUpperCase()); // ANIMALS
+System.out.println("Abc123".toLowerCase()); // abc123
+
+Checking for Equality
+The equals() method checks whether two String objects contain exactly the same characters in the same order. The equalsIgnoreCase() method checks whether two String
+objects contain the same characters, with the exception that it ignores the characters’ case.
+The method signatures are as follows:
+public boolean equals(Object obj)
+public boolean equalsIgnoreCase(String str)//equalsIgnoreCase() method only applies to
+
+String objects, so it can take the more specific type as the parameter
+System.out.println("abc".equals("ABC")); // false
+System.out.println("ABC".equals("ABC")); // true
+System.out.println("abc".equalsIgnoreCase("ABC")); // true
+
+
+Overriding toString(), equals(Object), and hashCode()
+Knowing how to properly override toString(), equals(Object), and hashCode()
+was part of Java certification exams in the past. As a professional Java developer, it is still
+important for you to know at least the basic rules for overriding each of these methods:
+■ toString(): The toString() method is called when you try to print an object or
+concatenate the object with a String. It is commonly overridden with a version that
+prints a unique description of the instance using its instance fields.
+■ equals(Object): The equals(Object) method is used to compare objects,
+with the default implementation just using the == operator. You should override the
+equals(Object) method any time you want to conveniently compare elements for
+equality, especially if this requires checking numerous fields.
+■ hashCode(): Any time you override equals(Object), you must override
+hashCode() to be consistent. This means that for any two objects, if a.equals(b) is
+true, then a.hashCode()==b.hashCode() must also be true. If they are not consistent, this could lead to invalid data and side effects in hash-based collections such as
+HashMap and HashSet.
+All of these methods provide a default implementation in Object, but if you want to make
+intelligent use of them, you should override them.
+
+-The startsWith() and endsWith() methods look at whether the provided value matches part
+of the String. The contains() method isn’t as particular; it looks for matches anywhere in the
+String. The method signatures are as follows:
+public boolean startsWith(String prefix)
+public boolean endsWith(String suffix)
+public boolean contains(CharSequence charSeq)
+The following code shows how to use these methods:
+System.out.println("abc".startsWith("a")); // true
+System.out.println("abc".startsWith("A")); // false
+System.out.println("abc".endsWith("c")); // true
+System.out.println("abc".endsWith("a")); // false
+System.out.println("abc".contains("b")); // true
+System.out.println("abc".contains("B")); // false
+
+
+-Replacing Values
+The replace() method does a simple search and replace on the string. There’s a version that
+takes char parameters as well as a version that takes CharSequence parameters. The method
+signatures are as follows:
+public String replace(char oldChar, char newChar)
+public String replace(CharSequence target, CharSequence replacement)
+The following code shows how to use these methods:
+System.out.println("abcabc".replace('a', 'A')); // AbcAbc
+System.out.println("abcabc".replace("a", "A")); // AbcAbc
+The first example uses the first method signature, passing in char parameters. The second
+example uses the second method signature, passing in String parameters
+
+Removing Whitespace
+The strip() and trim() methods remove whitespace from the beginning and end of a String.
+Additionally, the stripLeading() method removes whitespace from the beginning of
+the String and leaves it at the end. The stripTrailing() method does the opposite. It
+removes whitespace from the end of the String and leaves it at the beginning. The method
+signatures are as follows:
+public String strip()
+public String stripLeading()
+public String stripTrailing()
+public String trim()
+The following code shows how to use these methods:
+System.out.println("abc".strip()); // abc
+System.out.println("\t a b c\n".strip()); // a b c
+String text = " abc\t ";
+System.out.println(text.trim().length()); // 3
+System.out.println(text.strip().length()); // 3
+System.out.println(text.stripLeading().length()); // 5
+
+Checking for Empty or Blank Strings
+The method signatures are as follows:
+public boolean isEmpty()
+public boolean isBlank()
+The following code shows how to use these methods:
+System.out.println(" ".isEmpty()); // false
+System.out.println("".isEmpty()); // true
+System.out.println(" ".isBlank()); // true
+System.out.println("".isBlank()); // true
+
+The first line prints false because the String is not empty; it has a blank space in it.
+The second line prints true because this time, there are no characters in the String.
+
+
+Using the StringBuilder Class
+
+n. The StringBuilder class creates a
+String without storing all those interim String values. Unlike the String class,
+StringBuilder is not immutable.
+15: StringBuilder alpha = new StringBuilder();
+16: for(char current = 'a'; current <= 'z'; current++)
+17: alpha.append(current);//The call to append()adds a character to the StringBuilder object each time through the for loop,
+                            appending the value of current to the end of alpha.
+18: System.out.println(alpha);
+
+4: StringBuilder a = new StringBuilder("abc");
+5: StringBuilder b = a.append("de");
+6: b = b.append("f").append("g");
+7: System.out.println("a=" + a);
+8: System.out.println("b=" + b);
+Did you say both print "abcdefg"? Good
+
+Creating a StringBuilder
+There are three ways to construct a StringBuilder:
+StringBuilder sb1 = new StringBuilder();
+StringBuilder sb2 = new StringBuilder("animal");
+StringBuilder sb3 = new StringBuilder(10);
