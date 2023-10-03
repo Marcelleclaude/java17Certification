@@ -30,7 +30,7 @@ Then, you evaluate the remaining terms in left-to-right order, resulting in a va
 price of 14
 
 
-So, you can change the order of the operation by adding () to it.
+So, you can change the order of the operation by adding () to it. 
 Changing the Order of Operation
 Let’s return to the previous price example. The following code snippet contains the same
 values and operators, in the same order, but with two sets of parentheses added:
@@ -67,7 +67,7 @@ System.out.println(11 % 3); // 2
 Numeric Promotion Rules
 1. If two values have different data types, Java will automatically promote one of the
 values to the larger of the two data types.
-example:
+example: 
 What is the data type of x * y?
 int x = 1;
 long y = 33;
@@ -76,3 +76,33 @@ In this case, we follow the first rule. Since one of the values is int and the o
 and long is larger than int,the int value x is first promoted to a long. The result z is
 then a long value.
 
+2. If one of the values is integral and the other is floating-point, Java will automatically
+promote the integral value to the floating-point value’s data type.
+Example:
+What is the data type of x + y?
+double x = 39.21;
+float y = 2.1f;
+var z = x + y;
+remember:, floating-point literals are assumed to be double unless postfixed with an f, as in 2.1f.   with both operands being promoted to a double, and the result z would be a double value.
+
+3. Smaller data types, namely, byte, short, and char, are first promoted to int any time
+they’re used with a Java binary arithmetic operator with a variable (as opposed to a
+value), even if neither of the operands is int.
+Example:
+What is the data type of x * y?
+short x = 10;
+short y = 3;
+var z = x * y;
+On the last line, we must apply the third rule: that x and y will both be promoted to
+int before the binary multiplication operation, resulting in an output of type int
+
+4. After all promotion has occurred and the operands have the same data type, the resulting value will have the same data type as its promoted operands.
+What is the data type of w * x / y?
+short w = 14;
+float x = 13;
+double y = 30;
+var z = w * x / y;
+In this case, we must apply all of the rules. First, w will automatically be promoted to
+int solely because it is a short and is being used in an arithmetic binary operation. The
+promoted w value will then be automatically promoted to a float so that it can be multiplied with x. The result of w * x will then be automatically promoted to a double so
+that it can be divided by y, resulting in a double value.

@@ -1,0 +1,48 @@
+
+ A Java operator is a special
+symbol that can be applied to a set of variables, values, or literals—referred to as operands—
+and that returns a result
+
+Types of Operators
+Java supports three flavors of operators: unary, binary, and ternary. These types of operators
+can be applied to one, two, or three operands, respectively
+
+The arrow operator (->), sometimes called the arrow function or lambda
+operator, is a binary operator that represents a relationship between
+two operands.
+
+Applying Unary Operators
+By definition, a unary operator is one that requires exactly one operand, or variable, to
+function. 
+Increment ++e f++ Increments a value by 1
+Decrement --f h-- Decrements a value by 1
+
+Complement and Negation Operators
+The logical complement operator (!) flips the value of a boolean expression. For example, if the value is true, it will be converted to false, and
+vice versa. Example: 
+boolean isAnimalAsleep = false;
+System.out.print(isAnimalAsleep); // false
+isAnimalAsleep = !isAnimalAsleep;
+System.out.print(isAnimalAsleep); // true
+
+ bitwise complement operator (~), which
+flips all of the 0s and 1s in a number. It can only be applied to integer numeric types such as
+byte, short, char, int, and long. example:
+int value = 3; // Stored as 0011
+int complement = ~value; // Stored as 1100
+System.out.println(value); // 3
+System.out.println(complement); // -4
+
+ remember this rule: to find the bitwise complement of a number, multiply it by
+negative one and then subtract one.
+System.out.println(-1*value - 1); // -4
+System.out.println(-1*complement - 1); // 3
+
+Moving on to more common operators, the negation operator (-) reverses the sign of a
+numeric expression, as shown in these statements:
+double zooTemperature = 1.21;
+System.out.println(zooTemperature); // 1.21
+zooTemperature = -zooTemperature;
+System.out.println(zooTemperature); // -1.21
+zooTemperature = -(-zooTemperature);
+System.out.println(zooTemperature); // -1.21

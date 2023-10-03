@@ -1,0 +1,116 @@
+An assignment operator is a binary operator that modifies, or assigns, the variable on the
+left side of the operator with the result of the value on the right side of the equation. Unlike
+most other Java operators, the assignment operator is evaluated from right to left.
+The simplest assignment operator is the = assignment
+example: int herd =1;
+
+Assignment int a = 50; Assigns the value on the right to the variable on the left
+
+Casting Values:
+Casting is performed by placing the data type, enclosed in parentheses, to the left of the
+value you want to cast. Here are some examples of casting:
+int fur = (int)5;
+int hair = (short) 2;
+String type = (String) "Bird";
+short tail = (short)(4 + 10);
+long feathers = 10(long); // DOES NOT COMPILE because it is on the wrong side.
+
+Applying Casting
+int fish = (int)1.0;
+short bird = (short)1921222; // Stored as 20678
+int mammal = (int)9f;
+
+Remember: byte has a max value of 127.
+
+TABLE 2.6 Compound assignment operators
+Operator                 Example             Description
+Addition assignment      a += 5         Adds the value on the right to the variable on the left and
+assigns the sum to the variable
+
+Subtraction assignment    b -= 0.2      Subtracts the value on the right from the variable on the left
+and assigns the difference to the variable
+
+Multiplication assignment  c *= 100     Multiplies the value on the right with the variable on the left
+and assigns the product to the variable
+
+Division assignment        d /= 4       Divides the variable on the left by the value on the right and
+assigns the quotient to the variable
+
+EXAMPLE: They are = to same
+int camel = 2, giraffe = 3;
+camel = camel * giraffe; // Simple assignment operator
+camel *= giraffe; // Compound assignment operator
+
+Comparing Values:
+Operator       Example      Apply to primitives                               Apply to objects
+
+Equality         a == 10    Returns true if the two values represent the same value   Returns true if the two values reference the same object
+
+Inequality       b != 3.14   Returns true if the two values represent different values  Returns true if the two values do not reference the same object
+
+
+Relational Operators
+Operator           Example              Description
+Less than             a < 5            Returns true if the value on the left is strictly less than
+the value on the right
+
+Less than or equal to   b <= 6         Returns true if the value on the left is less than or
+equal to the value on the right
+
+Greater than            c > 9           Returns true if the value on the left is strictly greater
+than the value on the right
+
+Greater than or =       3 >= d         Returns true if the value on the left is greater than or
+equal to the value on the right
+
+Type comparison         e instanceof String      Returns true if the reference on the left side is an instance of the type on the right side (class, interface,
+record, enum, annotation)
+
+-null and the instanceof operator
+
+What happens if you call instanceof on a null variable? For the exam, you should know that
+calling instanceof on the null literal or a null reference always returns false.
+System.out.print(null instanceof Object); // false
+Object noObjectHere = null;
+System.out.print(noObjectHere instanceof String); // false
+
+Logical Operators
+Operator                Example              Description
+Logical AND             a & b               Value is true only if both values are true.
+Logical inclusive OR    c | d               Value is true if at least one of the values is true.
+Logical exclusive OR     e ^ f            Value is true only if one value is true and the other is false.
+
+Here are some tips to help you remember this table:
+■ AND is only true if both operands are true.
+■ Inclusive OR is only false if both operands are false.
+■ Exclusive OR is only true if the operands are different.
+
+Conditional Operators
+TABLE 2.10 Conditional operators
+Operator                 Example                     Description
+Conditional AND          a && b        Value is true only if both values are true. If the left side is false, then the right side will not be evaluated.
+Conditional OR           c || d       Value is true if at least one of the values is true. If the left side is true, then the right side will not be evaluated.
+EXAMPLE:
+int hour = 10;
+boolean zooOpen = true || (hour < 4);
+System.out.println(zooOpen); // true
+
+Making Decisions with the Ternary Operator
+
+The ternary operator has the following form: booleanExpression ? expression1 : expression2
+The first operand must be a boolean expression, and the second and third operands can
+be any expression that returns a value. e. The ternary operation is really a condensed form of a combined if and else statement that returns a value.
+
+
+The inequality operator (!=) can be used to compare objects.
+The return value of an assignment operation expression is the value of the newly
+assigned variable.
+. The logical complement operator (!) cannot be used to flip numeric values.
+? : takes 3 values
+- Unary operators are always executed before any surrounding numeric binary or ternary
+operators.
+
+-The post-decrement operator (--) returns the value of the variable before the decrement
+ is applied.
+
+ -The ! operator cannot be used on numeric values
