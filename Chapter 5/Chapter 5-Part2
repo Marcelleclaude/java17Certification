@@ -1,0 +1,63 @@
+Declaring Local and Instance Variables
+
+REMEMBER:: all local variable references are destroyed after the block is executed, but the objects they point to may
+still be accessible.
+
+-Local Variable Modifiers
+There’s only one modifier that can be applied to a local variable: final
+
+public void zooAnimalCheckup(boolean isWeekend) {
+ final int rest;//You declare rest as a final variable, which means it can only be assigned a value once.
+ if(isWeekend) rest = 5; else rest = 20;// THIS IS FINE BECAUSE you're assigning a value to it only once in both branches
+ System.out.print(rest);
+ final var giraffe = new Animal();
+ final int[] friends = new int[5];
+ rest = 10; // DOES NOT COMPILE because rest is declared final which makes it immutable.
+ giraffe = new Animal(); // DOES NOT COMPILE because ou attempt to reassign it with a new Animal object. and originally
+ you had already declare giraffe as final.
+ friends = null; // DOES NOT COMPILE friends has already been declared as final so you cannot reassign it.
+}
+
+example#2:
+public void zooAnimalCheckup(boolean isWeekend) {
+final int rest;
+if(isWeekend) rest = 5;
+System.out.print(rest); // DOES NOT COMPILE because you're trying to print rest outside the if block,
+}
+
+-Effectively Final Variables
+An effectively final local variable is one that is not modified after it is assigned.
+
+-IMPORTANT!!! final Specifies that the instance variable must be initialized with each instance of the class exactly once
+If an instance variable is marked final, then it must be assigned a value when it is declared or when the object is instantiated.
+
+-Working with Varargs
+There are a number of important rules for creating a method with a varargs parameter.
+Rules for Creating a Method with a Varargs Parameter
+1. A method can have at most one varargs parameter.
+2. If a method contains a varargs parameter, it must be the last parameter in the list.
+
+Example: public class VisitAttractions {
+public void walk1(int... steps) {}
+public void walk2(int start, int... steps) {}
+public void walk3(int... steps, int start) {} // DOES NOT COMPILE because Varargs must be the last parameter, so int start should come before int... steps. This will result in a compilation error.
+public void walk4(int... start, int... steps) {} // DOES NOT COMPILE  because You cannot have two varargs parameters in the same method
+ }
+
+ -Calling Methods with Varargs
+When calling a method with a varargs parameter, you have a choice. You can pass in an
+array, or you can list the elements of the array and let Java create it for you.
+
+Applying Access Modifiers
+Private Access : remember, only code in the same class can call a private method or access a private field.
+
+Package Access: allows classes in the same package to access her members.
+Remember that when there is no access modifier on a member, only classes
+in the same package can access the member
+
+Protected Access: Protected access allows everything that package access does, and more. The protected
+access modifier adds the ability to access members of a parent class
+public class Fish {}//parent class
+public class ClownFish extends Fish {}//child class
+By extending a class, the subclass gains access to all protected and public members
+of the parent class, as if they were declared in the subclass
