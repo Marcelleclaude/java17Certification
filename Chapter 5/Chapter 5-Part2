@@ -168,4 +168,30 @@ All static initializers run when the class is first used, in the order they are 
 22: two = 4// DOES NOT COMPILE because it is the 2nd time you try to assign it a value
 23: }
 
-static Imports
+what are static Imports?
+ Regular imports are for importing classes, while static imports are for importing static members of
+classes like variables and methods.
+
+EXAMPLE!!! import java.util.List;
+import static java.util.Arrays.asList; // static import.. We are importing the asList method so everytime
+we refer to asList in the class it will call Arrays.asList()
+public class ZooParking {
+public static void main(String[] args) {
+List<String> list = asList("one", "two"); // No Arrays. prefix
+}
+}
+
+BEWARE OF THE EXAM TRICKS LIKE SO...
+1: import static java.util.Arrays; // DOES NOT COMPILE because we are using a static import to import a class
+Remember, static imports are only for importing static members like a method or variable.
+2: import static java.util.Arrays.asList;
+3: static import java.util.Arrays.*; // DOES NOT COMPILE because its in the wrong order. its suppose to be import static.
+4: public class BadZooParking {
+5: public static void main(String[] args) {
+6: Arrays.asList("one"); // DOES NOT COMPILE asList("one") is fine since we imported it however, we never imported Array so it wont work.
+7: }}
+
+Important!! importing 2 static method of the same name will give an Compiler error.
+Here’s an example:
+import static zoo.A.TYPE;
+import static zoo.B.TYPE; // DOES NOT COMPILE
