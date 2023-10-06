@@ -26,3 +26,9 @@ The instanceof operator can be used to check whether an object belongs to a part
 and to prevent a ClassCastException at runtime
 
 Polymorphism and Method Overriding
+polymorphism states that when you override a method, you replace all calls to it, even those defined in the parent class
+Remember, you can choose to limit polymorphic behavior by marking methods final,
+which prevents them from being overridden by a subclass.
+
+Overriding vs. Hiding Members
+????
