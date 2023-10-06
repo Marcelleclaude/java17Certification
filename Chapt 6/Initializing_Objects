@@ -200,3 +200,10 @@ public class Main {
         Parent parent = new Child();
         System.out.println(parent.x);  // This also prints the child class's 'x', which is 20.
     }}
+
+
+Writing final Methods
+final methods cannot be overridden. By marking a method final, you forbid a child class from
+replacing this method. This rule is in place both when you override a method and when you
+hide a method. In other words, you cannot hide a static method in a child class if it is marked
+final in the parent class.
