@@ -93,3 +93,5 @@ Review:
 -final refers only to the reference to an object, not its contents.
 -a void method is optionally allowed to have a return statement as long as it doesn't try to return a value.
 -null requires a reference object as the return type.
+-you can change the value of a static variable within an instance initializer block.
+
