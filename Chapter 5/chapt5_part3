@@ -1,0 +1,97 @@
+Passing Data among Methods
+java uses pass-by-value to get data into a method. Assigning a new primitive
+or reference to a parameter doesn’t change the caller. Calling methods on a reference to an
+object can affect the caller.
+example:
+public class Dog {
+ public static void main(String[] args) {
+ String name = "Webby";
+ speak(name);
+ System.out.print(name);
+ }
+ public static void speak(String name) {
+ name = "Georgette";
+ }}
+
+ Returning Objects: If the returned value is not used, the result is ignored.
+
+ Autoboxing and Unboxing Variables
+ Autoboxing: is the process of converting a primitive into its equivalent wrapper class,
+ while unboxing: is the process of converting a wrapper class into its equivalent primitive.
+EXample:
+5: int quack = 5;
+6: Integer quackquack = quack; // Autoboxing
+7: int quackquackquack = quackquack; // Unboxing
+
+Important!!
+Widening Casting (automatically) - converting a smaller type to a larger type size
+byte -> short -> char -> int -> long -> float -> double
+
+Narrowing Casting (manually) - converting a larger type to a smaller size type
+double -> float -> long -> int -> char -> short -> byte
+
+
+Overloading Methods
+Method overloading occurs when
+methods in the same class have the same name but different method signatures
+
+The following shows five overloaded versions of the fly() method:
+public class Falcon {
+ public void fly(int numMiles) {}
+ public void fly(short numFeet) {}
+ public boolean fly() { return false; }
+ void fly(int numMiles, short numFeet) {}
+ public void fly(short numFeet, int numMiles) throws Exception {}
+ public int fly(int numMiles) { return 1; } // DOES NOT COMPILE . The method signatures are the same, so they are duplicate methods a
+}INT is the parameter
+
+Varargs
+public class Toucan {
+ public void fly(int[] lengths) {}
+ public void fly(int... lengths) {} // DOES NOT COMPILE because  we are not allowed to overload methods with the same parameter list,
+}
+
+EXAMPLE AND EXPLANATION ANSWER IS 142
+public class Glider {
+ public static String glide(String s) {
+ return "1";
+ }
+ public static String glide(String... s) {
+ return "2";
+ }
+ public static String glide(Object o) {
+ return "3";
+ }
+ public static String glide(String s, String t) {
+ return "4";
+ }
+ public static void main(String[] args) {
+ System.out.print(glide("a"));
+ System.out.print(glide("a", "b"));
+ System.out.print(glide("a", "b", "c"));
+ }
+}
+System.out.print(glide("a"));: The argument is a single String ("a").
+The glide(String s) method can accept this argument, and it is the most specific match.
+So, the glide(String s) method is called, and it returns "1."
+Therefore, it will print "1."
+-System.out.print(glide("a", "b"));: The arguments are two String values ("a" and "b").
+The glide(String s, String t) method is the most specific match for two String arguments.
+So, the glide(String s, String t) method is called, and it returns "4."
+Therefore, it will print "4."
+-System.out.print(glide("a", "b", "c"));:The arguments are three String values ("a," "b," and "c").
+The glide(String... s) method, which accepts a variable number of String arguments, is the most specific match for three String arguments.
+So, the glide(String... s) method is called, and it returns "2."
+Therefore, it will print "2."
+
+Review:
+-You can use access modifiers to allow access to all methods and not any instance variables.
+-static methods are not allowed to call instance methods
+-Instance and static variables can be marked final,
+-A primitive that is marked final cannot be modified.
+-var and final can be used together.
+-final refers only to the reference to an object, not its contents.
+-a void method is optionally allowed to have a return statement as long as it doesn't try to return a value.
+-null requires a reference object as the return type.
+-you can change the value of a static variable within an instance initializer block.
+

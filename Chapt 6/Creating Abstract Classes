@@ -1,0 +1,99 @@
+An abstract class is a class declared with the abstract modifier that
+cannot be instantiated directly and may contain abstract methods.
+
+An abstract method is a method declared with the abstract modifier that does not define a body. Put
+another way, an abstract method forces subclasses to override the method
+
+ rules you need to be aware of:
+■ Only instance methods can be marked abstract within a class, not variables, constructors, or static methods.
+■ An abstract method can only be declared in an abstract class.
+■ A non-abstract class that extends an abstract class must implement all inherited
+abstract methods.
+■ Overriding an abstract method follows the existing rules for overriding methods that
+you learned about earlier in the chapter.
+
+The following doesnt compile:
+public class FennecFox extends Canine {
+ public int getSound() {
+ return 10;
+ } }
+public class ArcticFox extends Canine {} ->it extends canine class but doesnt provide an implementation for the get
+sound method. n Java, when you extend a class and that class has abstract methods, you must provide concrete
+implementations for those methods in the subclass.
+
+public class Direwolf extends Canine { ->
+ public abstract rest(); ->The rest method is declared with the abstract keyword but is missing a return type.
+ Abstract methods should have a specified return type, and the return type should match with the one in the superclass
+ public String getSound() {->Direwolf provides a different return type for the getSound method compared to the Canine
+ class, which is not allowed in method overriding.
+ return "Roof!";
+ } }
+Creating Abstract Classes 317
+public class Jackal extends Canine {->he name variable is declared as abstract. Abstract variables are not allowed in
+Java. Only methods can be declared as abstract in abstract classes or interfaces.
+ public abstract String name;
+ public String getSound() {
+ return "Laugh";
+ } }
+
+- Declaring Abstract Methods
+An abstract method is always declared without a body. It also includes a semicolon (;) after
+the method declaration.Like the final modifier, the abstract modifier can be placed before or after the access
+modifier in class and method declarations, as shown in this Tiger class:
+abstract public class Tiger {
+abstract public int claw();}
+The abstract modifier cannot be placed after the class keyword in a class declaration
+or after the return type in a method declaration. The following Bear and howl() declarations do not compile for these reasons:
+public class abstract Bear { // DOES NOT COMPILE
+public int abstract howl(); // DOES NOT COMPILE
+}
+
+Creating a Concrete Class
+An abstract class becomes usable when it is extended by a concrete subclass. A concrete class
+is a non-abstract class. The first concrete subclass that extends an abstract class is required to
+implement all inherited abstract methods.
+
+public abstract class Animal {
+ public abstract String getName();
+}
+public class Walrus extends Animal {} // DOES NOT COMPILE
+we see that Animal is marked as abstract and Walrus is not, making Walrus a concrete subclass of Animal.
+since Walrus is the first concrete class he has to also include the getname() which it doesnt.
+
+Creating Constructors in Abstract Classes
+Even though abstract classes cannot be instantiated, they are still initialized through constructors by their subclasses.
+For the exam, remember that abstract classes are initialized with constructors in the same
+way as non-abstract classes. For example, if an abstract class does not provide a constructor,
+the compiler will automatically insert a default no-argument constructor.
+
+The primary difference between a constructor in an abstract class and a non-abstract class
+is that a constructor in an abstract class can be called only when it is being initialized by a
+non-abstract subclass. This makes sense, as abstract classes cannot be instantiated.
+
+Spotting Invalid Declarations
+public abstract class Turtle {
+ public abstract long eat() // DOES NOT COMPILE BECAUSE IT DOESNT END IWITH ;
+ public abstract void swim() {}; // DOES NOT COMPILE BECAUSE IT provide an implementation block enclosed
+in braces ({})
+ public abstract int getAge() { // DOES NOT COMPILE IT provide an implementation block enclosed in braces ({})
+ return 10; AN ABSTRACT METHOD MUST END WITH A ; WITHOUT ANY BRACES.
+ }
+ public abstract void sleep; // DOES NOT COMPILE NO () AT THE END
+ public void goInShell(); // DOES NOT COMPILE NOT MARKE ABSTRACT SO THEREFORE IT SHOULD HAVE{}
+
+ abstract and final Modifiers
+you cannot mark something final and abstract at the same time (e pa kay papaw ou ye)
+If you mark something abstract, you intend for someone else to extend or implement it. But if you mark
+something final, you are preventing anyone from extending or implementing it. T
+
+
+public abstract final class Tortoise { // DOES NOT COMPILE
+ public abstract final void walk(); // DOES NOT COMPILE
+}
+
+abstract and private Modifiers
+A method cannot be marked as both abstract and private.
+
+abstract and static Modifiers
+static method can only be hidden, not overridden. Its defined as belonging to the class, not an instance of the class. If a static method cannot be
+overridden, then it follows that it also cannot be marked abstract since it can never be implemented.

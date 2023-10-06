@@ -1,0 +1,24 @@
+an immutable object is one that cannot change state after it is created. The immutable objects pattern is an object-oriented design pattern in
+which an object cannot be modified after it is created.
+
+An immutable object is one that cannot be modified after it is declared. An immutable class is commonly implemented
+with a private constructor, no setter methods, and no ability to modify mutable objects contained within the class.
+
+
+Declaring an Immutable Class
+
+1. Mark the class as final or make all of the constructors private.
+2. Mark all the instance variables private and final.
+3. Don’t define any setter methods.
+4. Don’t allow referenced mutable objects to be modified.
+5. Use a constructor to set all properties of the object, making a copy if needed.
+
+The first rule prevents anyone from creating a mutable subclass. The second and third
+rules ensure that callers don’t make changes to instance variables and are the hallmarks of
+good encapsulation.
+The fourth rule for creating immutable objects is subtle. Basically, it means you shouldn’t
+expose an accessor (or getter) method for mutable instance fields.
+
+Performing a Defensive Copy
+The copy operation is called a defensive copy because the copy is being made in case
+other code does something unexpected.

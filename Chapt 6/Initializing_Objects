@@ -1,0 +1,209 @@
+Initializing Classes
+Initialize Class X
+1. If there is a superclass Y of X, then initialize class Y first.
+2. Process all static variable declarations in the order in which they appear in the class.
+3. Process all static initializers in the order in which they appear in the class.
+
+IMPORTANT!! a class must be initialized before it is referenced or used. Also, the class containing the program
+entry point,
+ aka the main() method, is loaded before the main() method is executed.
+
+rule: by the time the constructor completes, all final instance variables must be assigned a value exactly once
+public class MouseHouse {
+ private final int volume;
+ private final String name;
+ public MouseHouse() {
+ this.name = "Empty House"; // Constructor assignment
+ }
+ {
+ volume = 10; // Instance initializer assignment
+ }
+}
+
+Initialize Instance of X
+1. Initialize class X if it has not been previously initialized.
+2. If there is a superclass Y of X, then initialize the instance of Y first.
+3. Process all instance variable declarations in the order in which they appear in the class.
+4. Process all instance initializers in the order in which they appear in the class.
+5. Initialize the constructor, including any overloaded constructors referenced with this().
+
+IMPORTANT!!! . Remember, constructors are executed from the bottom up, but since the first line of every constructor is
+a call to another constructor, the flow ends up with the parent constructor executed before
+the child constructor.
+
+We conclude this section by listing important rules you should know for the exam:
+■ A class is initialized at most once by the JVM before it is referenced or used.
+■ All static final variables must be assigned a value exactly once, either when they
+are declared or in a static initializer.
+■ All final fields must be assigned a value exactly once, either when they are declared, in an
+instance initializer, or in a constructor.
+■ Non-final static and instance variables defined without a value are assigned a
+default value based on their type.
+■ Order of initialization is as follows: variable declarations, then initializers, and finally
+constructors.
+
+Inheriting Members
+    -Overriding a Method
+overriding a method occurs when a subclass declares a new implementation for an inherited method
+with the same signature and compatible return type.
+
+When you override a method, you may still reference the parent version of the method
+using the super keyword
+To override a method, you must follow a number of rules. The compiler performs the following checks when you override
+a method:
+1. The method in the child class must have the same signature as the method in the
+parent class.
+2. The method in the child class must be at least as accessible as the method in the
+parent class.
+3. The method in the child class may not declare a checked exception that is new or
+broader than the class of any exception declared in the parent class method.
+4. If the method returns a value, it must be the same or a subtype of the method in the parent class, known as covariant
+return types.
+While these rules may seem confusing or arbitrary at first, they are needed for consistency.
+Without these rules in place, it is possible to create contradictions within the Java language.
+5. The method defined in the child class must be marked as static if it is marked as
+static in a parent class
+
+Rule #1: Method Signatures
+If two methods have the same name but different signatures, the methods are overloaded, not overridden.
+-Overloading differs from overriding in that overloaded methods use a
+different parameter list
+
+LET'S DO A QUICK REVIEW:
+Method Overloading: is when you have multiple methods in the same class with the same name but different parameters.
+for example:
+class Calculator {
+int add(int a, int b) {
+return a + b;
+}->here as you can see there is 2 ass method with different parameter types(int and double)
+double add(double a, double b) {
+return a + b;
+}}
+
+Method Overriding:is when a subclass provides a specific implementation for a method that is already defined in its
+superclass.
+for example:
+class Animal {
+void makeSound() {
+System.out.println("Animal makes a sound");
+}}
+class Dog extends Animal {
+    void makeSound() {-> override the method with the same name in animal class.
+        System.out.println("Dog barks");
+    }}
+
+EXAMPLE:
+class Animal {
+    void makeSound() {
+        System.out.println("Animal makes a sound");
+    }
+}
+class Dog extends Animal {
+    void makeSound(String sound) {
+        System.out.println("Dog barks: " + sound);
+    }
+    @Override ->to indicate that we are overriding the makeSound method from the Animal class. This means we provide
+    a specific implementation for the makeSound method in the subclass that replaces the implementation in the superclass.
+    void makeSound() {
+        System.out.println("Dog barks");
+    }
+}
+public class Main {
+    public static void main(String[] args) {
+        Animal genericAnimal = new Animal();
+        genericAnimal.makeSound();  // Calls the makeSound method in the Animal class
+
+        Dog myDog = new Dog();
+        myDog.makeSound();  // Calls the overridden makeSound method in the Dog class
+        myDog.makeSound("Loudly");  // Calls the overloaded makeSound method in the Dog class
+    }
+}
+
+
+Rule #2: Access Modifiers
+Java limits overriding a method to access modifiers that are as accessible or more accessible
+than the version in the inherited method.
+
+Rule #3: Checked Exceptions
+One implication of this rule is that overridden methods are free to declare any number of new unchecked exceptions.
+
+Rule #4: Covariant Return Types
+The overriding method must use a return type that is covariant with the return type of the inherited method.
+meaning that, when you override a method from a superclass in a subclass,you can return a more specialized
+type when you override a method  (sa sa vle di )Covariant return types allow you to make your code more specific
+ and meaningful when you're dealing with method overriding.
+
+
+ Redeclaring private Methods
+Java permits you to redeclare a new method in the child class with the same or modified
+signature as the method in the parent class
+example:
+public class Beetle {
+ private String getSize() {
+ return "Undefined";
+ } }
+public class RhinocerosBeetle extends Beetle {
+ private int getSize() {
+ return 5;
+ } }
+Notice that the return type differs in the child method from String to int. In this
+example, the method getSize() in the parent class is redeclared, so the method in the child
+class is a new method and not an override of the method in the parent class.
+
+Hiding Static Methods
+A static method cannot be overridden because class objects do not inherit from each other in
+the same way as instance objects.However, they can be hidden.
+-hidden method occurs when a child class defines a static method with the same name and signature as an
+inherited static method defined in a parent class.
+
+Rule # 5- The method defined in the child class must be marked as static if it is marked as
+static in a parent class. Meaning: it is method hiding if the two methods are marked static and method overriding
+if they are not marked static. If one is marked static and the other is not, the class will not compile.
+Let’s review some examples of the new rule:
+public class Bear {
+ public static void eat() {
+ System.out.println("Bear is eating");
+ } }
+public class Panda extends Bear {
+ public static void eat() {-> it hides the eat() method in Bear class, printing "panda is chewing" @runtime
+ because they are both marked as static, it is not considered as an overriden method.
+ System.out.println("Panda is chewing");
+ }
+ public static void main(String[] args) {
+ eat(); } }
+
+-Hiding Variables
+A hidden variable occurs when a child class defines a variable with the same name as an
+inherited variable defined in the parent class.This creates two distinct copies of the variable
+within an instance of the child class: one instance defined in the parent class and one defined
+in the child class.
+
+Inheritance: When a child class extends a parent class, it inherits all the variables and methods defined
+in the parent class.
+
+Hidden Variable: If the child class defines a variable with the same name as a variable in the parent class,
+the variable in the child class hides the variable in the parent class. This means that when you access the variable
+using the same name in the child class, you're referring to the child class's variable, not the parent class's variable.
+
+example:
+class Parent {
+    int x = 10;
+}
+class Child extends Parent {
+    int x = 20;
+}
+public class Main {
+    public static void main(String[] args) {
+        Child child = new Child();
+        System.out.println(child.x);  // This prints the child class's 'x', which is 20.
+
+        Parent parent = new Child();
+        System.out.println(parent.x);  // This also prints the child class's 'x', which is 20.
+    }}
+
+
+Writing final Methods
+final methods cannot be overridden. By marking a method final, you forbid a child class from
+replacing this method. This rule is in place both when you override a method and when you
+hide a method. In other words, you cannot hide a static method in a child class if it is marked
+final in the parent class.

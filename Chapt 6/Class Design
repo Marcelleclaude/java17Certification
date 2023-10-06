@@ -1,0 +1,141 @@
+Understanding Inheritance
+What is Inheritance?? it is the process by which a subclass automatically includes certain members
+of the class, including primitives, objects, or methods, defined in the parent class.
+
+-Declaring a Subclass
+We indicate a class is a subclass by declaring it with the extends keyword. We don’t need
+to declare anything in the superclass other than making sure it is not marked final
+
+Important!! on that shortly.One key aspect of inheritance is that it is transitive. Given three classes [X, Y, Z], if X
+extends Y, and Y extends Z, then X is considered a subclass or descendant of Z.
+
+Important!! When one class inherits from a parent class, all public and protected members are automatically available as part of the child class
+ - If the two classes are in the same package, then package members are available to the child class.
+- private members are restricted to the class they are defined in and are never available
+via inheritance.means the subclass doesn’t have direct access to them.
+
+Class Modifiers
+-The final modifier prevents a class from being extended any further.
+For example:
+public final class Rhinoceros extends Mammal { }
+public class Clara extends Rhinoceros { } // DOES NOT COMPILE
+
+- Inheritance
+when Java sees you define a class that doesn’t extend another class, the
+compiler automatically adds the syntax extends java.lang.Object to the class definition.
+On the other hand, when you define a new class that extends an existing class, Java does
+not automatically extend the Object class. Since all classes inherit from Object, extending an
+existing class means the child already inherits from Object by definition
+
+Creating & Extending a Class
+Remember when working with subclasses that private members are never inherited,
+and package members are only inherited if the two classes are in the same package
+
+
+-Accessing the this Reference
+what is the this method? it refers to the current instance of the class and ca be used to access any member of the class, including
+inherited members.
+ public void setColor(String color) {
+ this.color = color; // Sets the instance variable with method parameter
+ }
+
+-Calling the super Reference
+The super reference is similar to the this reference, except that it
+excludes any members found in the current class. In other words, the member must be accessible via inheritance.
+public int getSpeed() {
+4: return super.speed; // Causes the program to now print 10
+5: }
+
+- Constructors
+constructor is a special method that matches the name of the
+class and has no return type. It is called when a new instance of the class is created
+-Creating a Constructor
+public class Bunny{
+public bunny() {} // DOES NOT COMPILE because bunny is written differently so java doesnt see it as a constructor
+public void Bunny() {}// isnt a constructor because it has a return type.
+}
+
+Important!!Like method parameters, constructor parameters can be any valid class, array, or primitive type,
+including generics, but may not include var
+
+A class can have multiple constructors, as long as each constructor has a unique constructor signature.
+In this case, that means the constructor parameters must be distinct
+
+Constructor Overloading: is when you declare multiple constructors with different signatures.
+
+Constructors are used when creating a new object this is called instantiation because it creates a new instance of the class.
+A constructor is called when we write new followed by the name of the class we want to instantiate. Here’s an example:
+new Turtle(15)
+When Java sees the new keyword, it allocates memory for the new object. It then looks
+for a constructor with a matching signature and calls it.
+
+-The Default Constructor
+the default constructor is added any time a class is declared without any constructors.
+Here’s an example:
+public class Rabbit {
+ public static void main(String[] args) {
+ new Rabbit(); // Calls the default constructor
+ }
+}
+VERY IMPORTANT!!! the compiler only inserts the default constructor when no constructors are defined
+Having only private constructors in a class tells the compiler not to
+provide a default no-argument constructor. It also prevents other classes
+from instantiating the class.
+
+Calling Overloaded Constructors with this()
+Since a class can contain multiple overloaded constructors, these constructors can actually call one another.
+
+iMPORTANT RULE!!!
+Calling this() has one special rule you need to know. If you choose to call it, the this() call
+must be the first statement in the constructor. The side effect of this is that there can be only
+one call to this() in any constructor.
+public Hamster(int weight) {
+System.out.println("chew");
+ // Set weight and default color
+this(weight, "brown"); // DOES NOT COMPILE
+ }
+
+EXTRA IMPORTANT RULES!!!
+■ A class can contain many overloaded constructors, provided the signature for each
+is distinct.
+■ The compiler inserts a default no-argument constructor if no constructors are declared.
+■ If a constructor calls this(), then it must be the first line of the constructor.
+■ Java does not allow cyclic constructor calls.
+
+Calling Parent Constructors with super()
+The first statement of every constructor is a call to a parent constructor using super() or
+another constructor in the class using this().
+public class Animal {
+ private int age;
+ public Animal(int age) {
+ super(); // Refers to constructor in java.lang.Object
+ this.age = age;
+ }
+}
+public class Zebra extends Animal {
+ public Zebra(int age) {
+ super(age); // Refers to constructor in Animal
+ }
+ public Zebra() {
+ this(4); // Refers to constructor in Zebra with int argument
+ }
+}
+
+
+IMPORTANT!! : super and super() are unrelated in Java. The first, super, is
+used to reference members of the parent class, while the second, super(), calls a parent constructor.
+calling super() can only be used as the first statement of the constructor. & super() can only be call once
+
+Understanding Compiler Enhancements
+the Java compiler automatically inserts a call to the no-argument constructor super() if you do not explicitly
+call this() or super() as the first line of a constructor.
+
+-Default Constructor Tips and Tricks
+
+We conclude this section by adding three constructor rules to your skill set:
+■ The first line of every constructor is a call to a parent constructor using super() or an
+overloaded constructor using this().
+■ If the constructor does not contain a this() or super() reference, then the compiler
+automatically inserts super() with no arguments as the first line of the constructor.
+■ If a constructor calls super(), then it must be the first line of the constructor.
+
