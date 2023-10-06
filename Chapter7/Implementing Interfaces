@@ -1,0 +1,154 @@
+An interface is an abstract data type that declares a list of abstract methods that any class implementing the interface
+must provide.
+In other words: An interface is a completely "abstract class" that is used to group related methods with empty bodies"
+// interface
+interface Animal {
+  public void animalSound(); // interface method (does not have a body)
+  public void run(); // interface method (does not have a body)
+}
+To access the interface methods, the interface must be "implemented" (kinda like inherited) by another class with the
+implements keyword (instead of extends). The body of the interface method is provided by the "implement" class:
+
+-Declaring and Using an Interface
+In Java, an interface is defined with the interface keyword
+
+Interface variables are referred to as constants because they are assumed to be public,
+static, and final.They are initialized with a constant value when they are declared. Since
+they are public and static, they can be used outside the interface declaration without
+requiring an instance of the interface.
+
+Example:
+public abstract interface CanBurrow {
+public abstract Float getSpeed(int age); <--- Abstract interface method
+ public static final int MINIMUM_DEPTH = 2; <--- Constant variable
+}
+
+interface declaration that differs from an abstract class is that it contains implicit modifiers. An implicit modifier is a modifier that the compiler automatically inserts into the code.
+For example, an interface is always considered to be abstract, even if it is not marked so.
+
+SO TO RECAP (ISH) :
+-An interface cannot be instantiated
+-an Interface cannot be marked as final
+-a class can implement multiple interfaces, each separated by a ,
+
+Extending an Interface
+Like a class, an interface can extend another interface using the extends keyword.
+public interface Nocturnal {}
+public interface HasBigEyes extends Nocturnal {}
+Unlike a class, which can extend only one class, an interface can extend multiple
+interfaces.
+
+Inheriting an Interface
+Like an abstract class, when a concrete class inherits an interface, all of the inherited abstract
+methods must be implemented
+
+Mixing Class and Interface Keywords
+Although a class can implement an interface, a class cannot extend an interface. Likewise, while an
+interface can extend another interface, an interface cannot implement another interface. The
+following examples illustrate these principles:
+public interface CanRun {}
+public class Cheetah extends CanRun {} // DOES NOT COMPILE because class cannot extend an interface
+public class Hyena {}
+public interface HasFur extends Hyena {} // DOES NOT COMPILE because an interface cannot extend a class
+
+Inheriting Duplicate Abstract Methods
+Java supports inheriting two abstract methods that have compatible method declarations.
+
+Inserting Implicit Modifiers
+an implicit modifier is one that the compiler will automatically insert.
+The following list includes the implicit modifiers for interfaces that you need to know
+for the exam:
+■ Interfaces are implicitly abstract.
+■ Interface variables are implicitly public, static, and final.
+■ Interface methods without a body are implicitly abstract.
+■ Interface methods without the private modifier are implicitly public.
+The last rule applies to abstract, default, and static interface methods, which we cover in
+the next section.
+
+Conflicting Modifiers
+    -Differences between Interfaces and Abstract Classes
+. How do the play() methods differ in the following two definitions?
+abstract class Husky { // abstract required in class declaration
+ abstract void play(); // abstract required in method declaration
+}
+interface Poodle { // abstract optional in interface declaration
+ void play(); // abstract optional in method declaration
+}
+
+Abstract Classes:
+Methods: Abstract classes can have both abstract (unimplemented) and concrete (implemented) methods.
+Inheritance: You can extend only one abstract class in your class hierarchy.
+Fields: They can have instance variables (fields) with values.
+Constructors: Abstract classes can have constructors.
+Usage: Use abstract classes when you want to create a base class with some shared behavior, and you might provide
+ default implementations for some methods.
+
+Interfaces:
+Methods: Interfaces only declare method signatures, and all methods are abstract (unimplemented).
+Inheritance: You can implement multiple interfaces in a class, allowing it to adhere to multiple sets of rules
+or contracts.
+Fields: They cannot have fields with values (variables are implicitly public, static, and final).
+Constructors: Interfaces cannot have constructors.
+Usage: Use interfaces when you want to define a contract that multiple classes can adhere to. Interfaces provide
+a way to ensure a consistent set of methods across different classes.
+
+-Writing a default Interface Method
+A default method is a method defined in an interface with the default keyword
+and includes a method body. One use of default methods is for backward compatibility
+The following is an example of a default method defined in an interface:
+public interface IsColdBlooded {
+ boolean hasScales();
+ default double getTemperature() {
+ return 10.0;
+ } }
+
+ Default Interface Method Definition Rules
+ 1. A default method may be declared only within an interface.
+ 2. A default method must be marked with the default keyword and include a method body.
+ 3. A default method is implicitly public.
+ 4. A default method cannot be marked abstract, final, or static.
+ 5. A default method may be overridden by a class that implements the interface.
+ 6. If a class inherits two or more default methods with the same method signature, then the
+ class must override the method.
+
+Static Interface Method Definition Rules
+1. A static method must be marked with the static keyword and include a
+method body.
+2. A static method without an access modifier is implicitly public.
+3. A static method cannot be marked abstract or final.
+4. A static method is not inherited and cannot be accessed in a class implementing the
+interface without a reference to the interface name
+
+Like default and abstract interface methods, static interface methods are implicitly public if they
+are declared without an access modifier
+
+Reusing Code with private Interface Methods
+Private Interface Method Definition Rules
+1. A private interface method must be marked with the private modifier and include a
+method body.
+2. A private static interface method may be called by any method within the interface
+definition.
+3. A private interface method may only be called by default and other private nonstatic methods within the
+interface definition
+
+Another way to think of it is that a private interface method is only accessible to nonstatic methods defined within the interface. A private static interface method, on
+the other hand, can be accessed by any method in the interface. For both types of private
+methods, a class inheriting the interface cannot directly invoke them.
+
+Calling Abstract Methods
+default and private non-static methods can access abstract methods declared in the interface
+public interface ZooRenovation {
+ public String projectName();
+ abstract String status();
+ default void printStatus() {
+ System.out.print("The " + projectName() + " project " + status());
+ } }
+In this example, both projectName() and status() have the same modifiers (abstract and public are implicit)
+and can be called by the default method
+printStatus().
+
+Reviewing Interface Members
+here are some quick tips for the exam:
+■ Treat abstract, default, and non-static private methods as belonging to an instance of the interface.
+■ Treat static methods and variables as belonging to the interface class object.
+■ All private interface method types are only accessible within the interface declaration
