@@ -1,0 +1,66 @@
+A sealed class is a class that restricts which other classes may directly
+extend it.
+
+Declaring a Sealed Class
+A sealed class declares a list of classes that can extend it,
+while the subclasses declare that they extend the sealed class
+
+public sealed class Bear permits Kodiak, Panda( list of permitted classes) {}
+public final class Kodiak extends Bear {}
+public non-sealed class Panda extends Bear {}
+
+Sealed Class Keywords
+■ sealed: Indicates that a class or interface may only be extended/implemented by named
+classes or interfaces
+■ permits: Used with the sealed keyword to list the classes and interfaces allowed
+■ non-sealed: Applied to a class or interface that extends a sealed class, indicating that it
+can be extended by unspecified classes
+
+public class sealed Frog permits GlassFrog {} // DOES NOT COMPILE because class and sealed modifier are in the wrong
+order
+public final class GlassFrog extends Frog {}
+public abstract sealed class Wolf permits Timber {}
+public final class Timber extends Wolf {}
+public final class MyWolf extends Wolf {} // DOES NOT COMPILE e because MyWolf isn’t listed in the declaration of Wolf.
+
+Specifying the Subclass Modifier
+very class that directly extends a sealed class must specify exactly one of the following three modifiers:
+final, sealed, or non-sealed. Remember this rule for the exam!
+
+A final Subclass
+public sealed class Antelope permits Gazelle {}
+public final class Gazelle extends Antelope {}
+public class George extends Gazelle {} // DOES NOT COMPILE
+Just as with a regular class, the final modifier prevents the subclass Gazelle from being
+extended further.
+
+A sealed Subclass
+public sealed class Mammal permits Equine {} -->The sealed modifier applied to the subclass Equine means the same kind of rules that
+ we applied to the parent class Mammal must be present.
+public sealed class Equine extends Mammal permits Zebra {}
+public final class Zebra extends Equine {}
+
+A non-sealed Subclass
+he non-sealed modifier is used to open a sealed parent class to potentially unknown subclasses
+
+Omitting the permits Clause
+
+Usage of the permits clause in sealed classes
+Location of direct subclasses                        permits clause
+In a different file from the sealed class               Required
+In the same file as the sealed class                    Permitted,but not required
+Nested inside of the sealed class                       Permitted, but not required
+
+Sealing Interfaces
+the sealed interface must appear in the same package or
+named module as the classes or interfaces that directly extend or implement it.
+
+Reviewing Sealed Class Rules
+■ Sealed classes are declared with the sealed and permits modifiers.
+■ Sealed classes must be declared in the same package or named module as their direct
+subclasses.
+■ Direct subclasses of sealed classes must be marked final, sealed, or non-sealed.
+■ The permits clause is optional if the sealed class and its direct subclasses are declared
+within the same file or the subclasses are nested within the sealed class.
+■ Interfaces can be sealed to limit the classes that implement them or the interfaces that
+extend them.

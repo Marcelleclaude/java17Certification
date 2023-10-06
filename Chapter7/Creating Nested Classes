@@ -1,0 +1,64 @@
+A nested class is a class that is defined within another class. so a class within a class.
+the purpose of nested classes is to group classes that belong together,
+which makes your code more readable and maintainable.
+
+ A nested class can come in one of four flavors.
+■ Inner class: A non-static type defined at the member level of a class
+■ Static nested class: A static type defined at the member level of a class
+■ Local class: A class defined within a method body
+■ Anonymous class: A special case of a local class that does not have a name
+
+Declaring an Inner Class
+An inner class, also called a member inner class, is a non-static type defined at the member
+level of a class (the same level as the methods, instance variables, and constructors)
+Inner classes have the following properties:
+■ Can be declared public, protected, package, or private
+■ Can extend a class and implement interfaces
+■ Can be marked abstract or final
+■ Can access members of the outer class, including private members
+
+Referencing Members of an Inner Class
+Inner classes can have the same variable names as outer classes.
+
+Creating a static Nested Class
+A static nested class is a static type defined at the member level. Unlike an inner class, a static
+nested class can be instantiated without an instance of the enclosing class.
+In other words, it is like a top-level class except for the following:
+■ The nesting creates a namespace because the enclosing class name must be used to
+refer to it.
+■ It can additionally be marked private or protected.
+■ The enclosing class can refer to the fields and methods of the static nested class.
+
+Writing a Local Class
+A local class is a nested class defined within a method. Like local variables, a local class
+declaration does not exist until the method is invoked, and it goes out of scope when the
+method returns. This means you can create instances only from within the method.
+
+Local classes have the following properties:
+■ They do not have an access modifier.
+■ They can be declared final or abstract.
+■ They have access to all fields and methods of the enclosing class (when defined in an
+instance method).
+■ They can access final and effectively final local variables.
+
+reminder:
+"Effectively final" is a term used in Java to describe a variable that is, in essence, treated as if it
+were declared as final, even though it may not have the final keyword for example:
+int age = 30; // Not marked as 'final' but effectively final
+// The 'age' variable is effectively final because its value doesn't change here
+if (age > 25) {
+    // Some code
+}->n this code, age is not declared as final, but it behaves as if it were because its value doesn't
+ change within the defined scope.
+// The 'age' variable is still effectively final here because it hasn't changed
+System.out.println(age);
+
+Defining an Anonymous Class
+An anonymous class is a specialized form of a local class that does not have a name.
+e. It is
+declared and instantiated all in one statement using the new keyword, a type name with
+parentheses, and a set of braces {}. Anonymous classes must extend an existing class or
+implement an existing interface. The anonymous class is the same whether you implement an interface or extend a class!
+
+Reviewing Nested Classes
+Table 7.4 & 7.5
