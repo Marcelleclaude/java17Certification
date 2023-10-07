@@ -1,0 +1,30 @@
+A functional interface is an interface that contains a single
+abstract method
+
+Defining a Functional Interface
+The @FunctionalInterface annotation tells the compiler that you intend for the code to
+be a functional interface.
+
+Adding Object Methods
+All classes inherit certain methods from Object. For the exam, you should know the following Object method signatures:
+■ public String toString()
+■ public boolean equals(Object)
+■ public int hashCode()
+
+If a functional interface includes an abstract method with the same signature as a public method found in Object,
+those methods do not count toward the single abstract method test
+
+Let’s take a look at an example. Is the Soar class a functional interface?
+public interface Soar {
+ abstract String toString();
+}
+It is not. Since toString() is a public method implemented in Object, it does not
+count toward the single abstract method test.
+
+Example of a functional interface:
+public interface Dive {
+ String toString();
+ public boolean equals(Object o);
+ public abstract int hashCode();
+ public void dive();
+}

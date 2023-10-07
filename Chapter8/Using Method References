@@ -1,0 +1,54 @@
+The :: operator tells Java to call the println() method later.
+A method reference and a lambda behave the same way at runtime.
+There are four formats for method references:
+■ static methods
+■ Instance methods on a particular object
+■ Instance methods on a parameter to be determined at runtime
+■ Constructors
+
+the :: operator is used in method references, which are a way to reference methods without invoking them.
+Method references provide a shorthand notation for creating functional interfaces and lambdas.
+The :: operator is followed by a method name, and it can be used in several contexts, depending on the method
+reference type. There are four main types of method references:
+
+1- Reference to a Static Method: Used to reference a static method of a class or an interface.
+ClassName::staticMethodName
+
+2- Reference to an Instance Method of a Particular Object: Used to reference an instance method of a specific object.
+objectReference::instanceMethodName
+
+3-Reference to an Instance Method of an Arbitrary Object of a Particular Type: Used to reference an instance method
+ of an object of a particular type, which can be different objects of the same type.
+ClassName::instanceMethodName
+
+4-Reference to a Constructor: Used to reference a constructor of a class.
+ClassName::new
+
+Here's a simple example of each type:
+// Reference to a static method
+Function<Integer, String> intToString = Integer::toString;
+// Reference to an instance method of a particular object
+String myString = "Hello";
+Supplier<Integer> stringLength = myString::length;
+// Reference to an instance method of an arbitrary object of a particular type
+List<String> names = List.of("Alice", "Bob", "Charlie");
+names.forEach(System.out::println);
+// Reference to a constructor
+Supplier<List<String>> listSupplier = ArrayList::new;
+List<String> newList = listSupplier.get();
+
+Calling static Methods (Mpa finn konprann)
+We can implement this interface with the round() method in Math. Here we assign a
+method reference and a lambda to this functional interface:
+14: Converter methodRef = Math::round;
+15: Converter lambda = x -> Math.round(x);
+16:
+17: System.out.println(methodRef.round(100.1)); // 100
+
+Calling Instance Methods on a Particular Object:
+
+it is not possible to write this lambda as a method reference
+
+Calling Constructors
+
+A constructor reference is a special type of method reference that uses new instead of a method & instantiates an object

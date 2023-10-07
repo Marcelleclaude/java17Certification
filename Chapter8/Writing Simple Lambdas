@@ -1,0 +1,23 @@
+Looking at a Lambda Example
+A lambda expression is a short block of code which takes in parameters and returns a value. Lambda expressions
+are similar to methods, but they do not need a name and they can be implemented right in the body of a method.
+
+-Deferred execution means that code is specified now but will run later In this case, “later” is inside the print() method
+body, as opposed to when it is passed to the method.
+
+Learning Lambda Syntax
+One of the simplest lambda expressions you can write is the one you just saw:
+a -> a.canHop()
+Lambdas work with interfaces that have exactly one abstract method.
+
+a (parameter name) -> a.canHop() <--- body
+
+The second example shows the most verbose form of a lambda that returns a boolean
+(see Figure 8.2):
+■ A single parameter specified with the name a and stating that the type is Animal
+■ The arrow operator (->) to separate the parameter and body
+■ A body that has one or more lines of code, including a semicolon and a
+return statement
+(Animal a) -> { return a.canHop(); }
+The parentheses around the lambda parameters can be omitted only if there is a single
+parameter and its type is not explicitly stated
