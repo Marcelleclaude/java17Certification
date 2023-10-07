@@ -1,0 +1,129 @@
+java.util.function package
+<T> allows the interface to take an object of a specified type
+If a second type parameter is needed, we use the next letter, U.
+If a distinct return type is needed, we choose R for return as the generic type.
+
+Implementing Supplier
+Functional interface   Return type  Method name    # of parameters
+Supplier<T>              T           get()           0
+A Supplier is used when you want to generate or supply values without taking any input. The Supplier interface:
+@FunctionalInterface
+public interface Supplier<T> {
+ T get();
+}\
+
+Implementing Consumer and BiConsumer
+functional interface   Return type  Method name    # of parameters
+Consumer<T>             void        accept(T)            1 (T)
+BiConsumer<T, U>        void        accept(T,U)          2 (T, U)
+-You use a Consumer when you want to do something with a parameter but not return
+ anything.
+-BiConsumer does the same thing, except that it takes two parameters. The interfaces
+ are defined as follows:
+@FunctionalInterface
+public interface Consumer<T> {
+void accept(T t);
+ // omitted default method
+}
+@FunctionalInterface
+public interface BiConsumer<T, U> {
+ void accept(T t, U u);
+ // omitted default method
+}
+
+Implementing Predicate and BiPredicate
+functional interface   Return type  Method name    # of parameters
+Predicate<T>            boolean        test(T)          1 (T)
+BiPredicate<T, U>       boolean         test(T,U)       2 (T, U)
+-Predicate is often used when filtering or matching.
+- A BiPredicate is just like a Predicate, except that it takes two parameters instead of one. The interfaces are
+defined as follows:
+@FunctionalInterface
+public interface Predicate<T> {
+ boolean test(T t);
+ // omitted default and static methods
+}
+@FunctionalInterface
+public interface BiPredicate<T, U> {
+ boolean test(T t, U u);
+ // omitted default methods
+}
+Note that a Predicate returns a boolean primitive and not a Boolean object
+
+Implementing Function and BiFunction
+functional interface   Return type  Method name    # of parameters
+Function<T, R>              R       apply(T)            1 (T)
+BiFunction<T, U, R>         R       apply(T,U)          2 (T, U)
+
+A Function is responsible for turning one parameter into a value of a potentially different
+type and returning it. Similarly, a BiFunction is responsible for turning two parameters into a
+value and returning it. The interfaces are defined as follows:
+@FunctionalInterface
+public interface Function<T, R> {
+ R apply(T t);
+ // omitted default and static methods
+}
+@FunctionalInterface
+public interface BiFunction<T, U, R> {
+ R apply(T t, U u);
+ // omitted default method
+}
+
+
+Implementing UnaryOperator and BinaryOperator
+functional interface   Return type  Method name    # of parameters
+UnaryOperator<T>        T            apply(T)           1 (T)
+BinaryOperator<T>       T               apply(T,T)      2 (T, T)
+-UnaryOperator and BinaryOperator are special cases of a Function. They require all type parameters to be the same type.
+
+-A UnaryOperator transforms its value into one of the same type. For example, incrementing by one is a unary operation.
+ In fact, UnaryOperator extends Function.
+
+-A BinaryOperator merges two values into one of the same type. Adding two numbers is a binary operation.
+Similarly, BinaryOperator extends BiFunction.The interfaces are defined as follows:
+
+@FunctionalInterface
+public interface UnaryOperator<T> extends Function<T, T> {
+ // omitted static method
+}
+@FunctionalInterface
+public interface BinaryOperator<T> extends BiFunction<T, T, T> {
+ // omitted static methods
+}
+This means the method signatures look like this:
+T apply(T t); // UnaryOperator
+T apply(T t1, T t2); // BinaryOperator
+
+- Checking Functional Interfaces
+What functional interface would you use in these three situations?
+■ Returns a String without taking any parameters = a supplier because it generates an object and takes no parameters
+■ Returns a Boolean and takes a String = a function<String,Boolean> because it takes one parameter & returns anothertype.
+■ Returns an Integer and takes two Integers = either a BinaryOperator<Integer> or a BiFunction<Integer,Integer,Integer>.
+ Since BinaryOperator is a special case of BiFunction, either is a correct answer.
+ BinaryOperator<Integer> is the better answer of the two since it is more specific.
+
+ What functional interface would you use to fill in the blanks for these?
+ 6:Predicate :  <List> ex1 = x -> "".equals(x.get(0)); Line 6 passes one List parameter to the lambda and returns
+ a boolean. This tells us that it is a Predicate or Function.
+Since the generic declaration has only one parameter, it is a Predicate.
+
+ 7: Consumer : <Long> ex2 = (Long l) -> System.out.println(l); Line 7 passes one Long parameter to the lambda and
+ doesn’t return anything.
+
+ 8: <String, String> ex3 = (s1, s2) -> false; Line 8 takes two parameters and returns a boolean. When you see
+a boolean returned, think Predicate unless the generics specify a Boolean return type. In this case,
+there are two parameters, so it is a BiPredicate
+
+Learning the Functional Interfaces for Primitives
+    -Functional Interfaces for boolean
+BooleanSupplier is a separate type. It has one method to implement:
+@FunctionalInterface
+public interface BooleanSupplier {
+ boolean getAsBoolean();
+}
+
+There are a few things to notice that are different between Table 8.4 and Table 8.6:
+■ Generics are gone from some of the interfaces, and instead the type name tells us what
+primitive type is involved. In other cases, such as IntFunction, only the return type
+generic is needed because we’re converting a primitive int into an object.
+■ The single abstract method is often renamed when a primitive type is returned.

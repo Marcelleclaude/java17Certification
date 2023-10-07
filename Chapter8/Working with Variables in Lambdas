@@ -1,0 +1,29 @@
+Now that we’ve learned about functional interfaces, we will use them to show different
+approaches for variables. They can appear in three places with respect to lambdas: the
+parameter list, local variables declared inside the lambda body, and variables referenced from
+the lambda body.
+
+Listing Parameters
+Earlier in this chapter, you learned that specifying the type of parameters is optional.
+Additionally, var can be used in place of the specific type. That means that all three of these statements
+are interchangeable:
+
+Predicate<String> p = x -> true;
+Predicate<String> p = (var x) -> true;
+Predicate<String> p = (String x) -> true;
+
+II. Using Local Variables Inside a Lambda Body
+Now let’s try a hard one. How many syntax errors do you see in this method?
+11: public void variables(int a) {
+12: int b = 1;
+13: Predicate<Integer> p1 = a -> {->The variable a was already used in
+this scope as a method parameter, so it cannot be reused.
+14: int b = 0;->code cannot redeclare variable
+15: int c = 0;
+16: return b == c; } -> there should be a semicolon at the end
+17: }
+
+Referencing Variables from the Lambda Body
+  lambda can access an instance variable, method parameter, or local variable under certain conditions.
+   Instance variables (and class variables) are always allowed.
+The only thing lambdas cannot access are variables that are not final or effectively final.

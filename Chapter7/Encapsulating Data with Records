@@ -1,0 +1,86 @@
+Understanding Encapsulation
+The meaning of Encapsulation, is to make sure that "sensitive" data is hidden from users. To achieve this, you must:
+declare class variables/attributes as private
+provide public get and set methods to access and update the value of a private variable
+Get and Set
+You learned from the previous chapter that private variables can only be accessed within the same class
+(an outside class has no access to it). However, it is possible to access them if we provide public get and set methods.
+The get method returns the variable value, and the set method sets the value.
+Syntax for both is that they start with either get or set, followed by the name of the variable, with the first letter
+ in upper case:
+ public class Person {
+   private String name; // private = restricted access
+   // Getter
+   public String getName() { ->The get method returns the value of the variable name
+     return name;
+   }
+   // Setter
+   public void setName(String newName) {->The set method takes a parameter (newName) and assigns it to the name variable.
+     this.name = newName; ->The this keyword is used to refer to the current object.
+   }
+ }
+
+ Applying Records
+A record is a special type of data-oriented class in which the compiler inserts boilerplate code for you.
+Members Automatically Added to Records
+■ Constructor: A constructor with the parameters in the same order as the record
+declaration
+■ Accessor method: One accessor for each field
+■ equals(): A method to compare two elements that returns true if each field is equal in
+terms of equals()
+■ hashCode(): A consistent hashCode() method using all of the fields
+■ toString(): A toString() implementation that prints each field of the record in a
+convenient, easy-to-read format.
+
+Fun fact: it is legal to have a record without any fields. It is simply declared with the
+record keyword and parentheses:
+public record Crane() {}
+
+Understanding Record Immutability
+records don’t have setters.Every field is inherently final and cannot be modified after it has been written
+in the constructor. In order to “modify” a record, you have to make a new object and copy all of the data you
+want to preserve.
+var cousin = new Crane(3, "Jenny");
+var friend = new Crane(cousin.numberEggs(), "Janeice");
+
+Just as interfaces are implicitly abstract, records are also implicitly final. The final
+modifier is optional but assumed.
+public final record Crane(int numberEggs, String name) {}
+Like enums, that means you can’t extend or inherit a record.
+public record BlueCrane() extends Crane {} // DOES NOT COMPILE
+
+Also like enums, a record can implement a regular or sealed interface, provided it implements all of the abstract methods.
+public interface Bird {}
+public record Crane(int numberEggs, String name) implements Bird {}
+
+Declaring Constructors
+    -The Long Constructor
+we can just declare the constructor the compiler normally inserts automatically, which
+we refer to as the long constructor.
+
+    -Compact Constructors (figure 7.7)
+A compact constructor is a special type of constructor used for records to process validation
+and transformations succinctly. It takes no parameters and implicitly sets all fields.
+in other words, its like a shortcut for creating and setting up data objects with lots of properties
+ere's how it works:
+No Arguments Needed: You don't have to provide any values when creating these objects.
+All Fields Get Set: The constructor automatically sets values for all the properties (fields)
+of the object based on some default rules or the values you specify when you create it.
+Easier and Shorter: It makes your code shorter and easier to read because you don't have to explicitly
+ set each property one by one.
+Person alice = new Person("Alice", 30);
+
+
+Transforming Parameters
+Compact constructors give you the opportunity to apply transformations to any of the input values.
+
+Customizing Records
+Records actually support many of the same features as a class. Here are some of the
+members that records can include and that you should be familiar with for the exam:
+■ Overloaded and compact constructors
+■ Instance methods including overriding any provided methods (accessors, equals(),
+hashCode(), toString())
+■ Nested classes, interfaces, annotations, enum, and records
+
+Records also do not support instance initializers. All initialization for the fields of a
+record must happen in a constructor.

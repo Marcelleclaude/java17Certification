@@ -1,0 +1,34 @@
+Polymorphism means "many forms", and it occurs when we have many classes that are related to each other by inheritance.
+Like we specified in the previous chapter; Inheritance lets us inherit attributes and methods from another class.
+Polymorphism uses those methods to perform different tasks. This allows us to perform a single action in different ways.
+
+Object vs. Reference
+We can summarize this principle with the following two rules:
+1. The type of the object determines which properties exist within the object in memory.
+2. The type of the reference to the object determines which methods and variables are
+accessible to the Java program.
+
+Casting Objects
+We summarize these concepts into a set of rules for you to memorize for the exam:
+1. Casting a reference from a subtype to a supertype doesn’t require an explicit cast.
+2. Casting a reference from a supertype to a subtype requires an explicit cast.
+3. At runtime, an invalid cast of a reference to an incompatible type results in a
+ClassCastException being thrown.
+4. The compiler disallows casts to unrelated types.
+
+Lemur lemur = new Lemur();
+Primate primate = lemur; // Implicit Cast to supertype
+Lemur lemur2 = (Lemur)primate; // Explicit Cast to subtype
+Lemur lemur3 = primate; // DOES NOT COMPILE (missing cast)
+
+The instanceof Operator
+The instanceof operator can be used to check whether an object belongs to a particular class or interface
+and to prevent a ClassCastException at runtime
+
+Polymorphism and Method Overriding
+polymorphism states that when you override a method, you replace all calls to it, even those defined in the parent class
+Remember, you can choose to limit polymorphic behavior by marking methods final,
+which prevents them from being overridden by a subclass.
+
+Overriding vs. Hiding Members
+????
